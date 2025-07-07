@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject enemyPrefab;
+    public GameObject[] enemyPrefabs;
     public Vector3 spawnAreaCenter = Vector3.zero;
     public float spawnRange = 20f;
 
@@ -31,16 +31,19 @@ public class EnemySpawner : MonoBehaviour
     void SpawnWave()
     {
         for (int i = 0; i < enemiesPerWave; i++)
-        {
-            Vector3 randomOffset = new Vector3(
-                Random.Range(-spawnRange, spawnRange),
-                0f,
-                Random.Range(-spawnRange, spawnRange)
-            );
-            Vector3 spawnPos = spawnAreaCenter + randomOffset;
+    {
+        Vector3 randomOffset = new Vector3(
+            Random.Range(-spawnRange, spawnRange),
+            0f,
+            Random.Range(-spawnRange, spawnRange)
+        );
+        Vector3 spawnPos = spawnAreaCenter + randomOffset;
 
-            Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
-        }
+        int randomIndex = Random.Range(0, enemyPrefabs.Length);
+        GameObject prefab = enemyPrefabs[randomIndex];
+
+        Instantiate(prefab, spawnPos, Quaternion.identity);
+    }
 
         Debug.Log($"Wave {currentWave + 1} spawned with {enemiesPerWave} enemies.");
     }

@@ -3,12 +3,14 @@ using UnityEngine;
 public class BaseEnemy : MonoBehaviour
 {
     public float speed = 3f;
-    public float damage = 10f;
+    public int maxHits = 2; // how many hits it takes to destroy
+    private int currentHits;
 
     protected Transform player;
 
     protected virtual void Start()
     {
+        currentHits = maxHits;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -27,10 +29,17 @@ public class BaseEnemy : MonoBehaviour
         transform.LookAt(player);
     }
 
-    // Example attack method - you can call this on contact or with a timer
-    public virtual void Attack()
+    public virtual void TakeHit()
     {
-        Debug.Log($"{gameObject.name} attacks for {damage} damage.");
-        // Apply damage to player here
+        currentHits--;
+        if (currentHits <= 0)
+        {
+            Die();
+        }
+    }
+
+    protected virtual void Die()
+    {
+        Destroy(gameObject);
     }
 }
