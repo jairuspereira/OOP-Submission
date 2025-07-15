@@ -3,48 +3,54 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs;
-    public Vector3 spawnAreaCenter = Vector3.zero;
-    public float spawnRange = 20f;
+    [SerializeField] private GameObject[] enemyPrefabs;
+    [SerializeField] private Vector3 spawnAreaCenter = Vector3.zero;
+    [SerializeField] private float innerRadius = 10f;
+    [SerializeField] private float outerRadius = 20f;
 
-    public int enemiesPerWave = 5;
-    public float timeBetweenWaves = 10f;
-    public int maxWaves = 10;
+    [SerializeField] private int enemiesPerWave = 5;
+    [SerializeField] private int maxWaves = 10;
 
     private int currentWave = 0;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(SpawnWaves());
     }
 
-    IEnumerator SpawnWaves()
+    private IEnumerator SpawnWaves()
     {
         while (currentWave < maxWaves)
         {
-            yield return new WaitForSeconds(timeBetweenWaves);
             SpawnWave();
             currentWave++;
+
+            // Wait until all enemies are destroyed before starting the next wave
+            yield return new WaitUntil(() => GameObject.FindObjectsByType<BaseEnemy>(0).Length == 0);
         }
     }
 
-    void SpawnWave()
+    private void SpawnWave()
     {
+        int typeCount = Mathf.Min(currentWave + 1, enemyPrefabs.Length);
+
         for (int i = 0; i < enemiesPerWave; i++)
-    {
-        Vector3 randomOffset = new Vector3(
-            Random.Range(-spawnRange, spawnRange),
-            0f,
-            Random.Range(-spawnRange, spawnRange)
-        );
-        Vector3 spawnPos = spawnAreaCenter + randomOffset;
+        {
+            Vector3 spawnPos = GetRandomDonutPosition();
+            int randomIndex = (typeCount == 1) ? 0 : Random.Range(0, typeCount);
+            GameObject prefab = enemyPrefabs[randomIndex];
+            Instantiate(prefab, spawnPos, Quaternion.identity);
+        }
 
-        int randomIndex = Random.Range(0, enemyPrefabs.Length);
-        GameObject prefab = enemyPrefabs[randomIndex];
-
-        Instantiate(prefab, spawnPos, Quaternion.identity);
+        Debug.Log($"Wave {currentWave + 1} spawned with {enemiesPerWave} enemies from {typeCount} types.");
     }
 
-        Debug.Log($"Wave {currentWave + 1} spawned with {enemiesPerWave} enemies.");
+    private Vector3 GetRandomDonutPosition()
+    {
+        float angle = Random.Range(0f, Mathf.PI * 2f);
+        float radius = Mathf.Sqrt(Random.Range(innerRadius * innerRadius, outerRadius * outerRadius));
+        float x = spawnAreaCenter.x + radius * Mathf.Cos(angle);
+        float z = spawnAreaCenter.z + radius * Mathf.Sin(angle);
+        return new Vector3(x, spawnAreaCenter.y, z);
     }
 }

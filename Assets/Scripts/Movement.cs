@@ -19,8 +19,10 @@ public class Hero3DController : MonoBehaviour
         mainCamera = Camera.main;
     }
 
+    
     void Update()
     {
+        if (Time.timeScale == 0f) return;
         HandleMovement();
         RotateTowardMouse();
         HandleShooting();

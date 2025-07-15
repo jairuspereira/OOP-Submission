@@ -8,6 +8,10 @@ public class GameOverManager : MonoBehaviour
 
     private bool isGameOver = false;
 
+    public void Start()
+    {
+        gameOverScreen.SetActive(false);
+    }
     public void TriggerGameOver()
     {
         if (isGameOver) return;
@@ -21,5 +25,6 @@ public class GameOverManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        gameOverScreen.SetActive(false);
     }
 }

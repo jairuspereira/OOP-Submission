@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3944390604170145269}
   - component: {fileID: -666141830552406523}
-  - component: {fileID: -3770078337590093264}
+  - component: {fileID: 2207037228903276381}
   m_Layer: 0
-  m_Name: fast enemy
+  m_Name: Zigzag
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57,7 +57,7 @@ CapsuleCollider:
   m_Height: 2.560264
   m_Direction: 1
   m_Center: {x: 0, y: 0.78013206, z: 0.05540657}
---- !u!114 &-3770078337590093264
+--- !u!114 &2207037228903276381
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -66,11 +66,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3025136067541485413}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f48083a053ca47c591d7dc33608716a, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f242f09774084cde8904948adf0878d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  maxHits: 1
+  speed: 18.13
+  maxHits: 2
+  zigzagStrength: 3.8
+  zigzagSpeed: 132.2
 --- !u!1 &7137886627417541376
 GameObject:
   m_ObjectHideFlags: 0
@@ -11073,7 +11075,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7f20631f61be84b6da778fb8aa725ab1, type: 2}
+  - {fileID: 2100000, guid: f4952bc60493a4f8380370fc2765a64c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
