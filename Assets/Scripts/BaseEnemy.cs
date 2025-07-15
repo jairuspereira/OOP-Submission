@@ -9,25 +9,25 @@ public class BaseEnemy : MonoBehaviour
     protected Transform player;
     private bool isDead = false;
 
-    // Property for speed (can get and set, but not below zero)
+    // ENCAPSULATION
     public float Speed
     {
         get { return speed; }
         set { speed = Mathf.Max(0, value); }
     }
 
-    // Property for maxHits (can get and set, but at least 1)
-    public int MaxHits
+    
+    public int MaxHits // ENCAPSULATION
     {
         get { return maxHits; }
         set
         {
             maxHits = Mathf.Max(1, value);
-            currentHits = maxHits; // Reset current hits if maxHits changes
+            currentHits = maxHits; 
         }
     }
 
-    // Read-only property for currentHits
+    
     public int CurrentHits => currentHits;
 
     protected virtual void Start()
@@ -41,7 +41,7 @@ public class BaseEnemy : MonoBehaviour
         MoveTowardsPlayer();
     }
 
-    protected virtual void MoveTowardsPlayer()
+    protected virtual void MoveTowardsPlayer() // ABSTRACTION
     {
         if (player == null) return;
 
@@ -51,7 +51,7 @@ public class BaseEnemy : MonoBehaviour
         transform.LookAt(player);
     }
 
-    public virtual void TakeHit()
+    public virtual void TakeHit() // ABSTRACTION
     {
         if (isDead) return;
         currentHits--;
@@ -62,7 +62,7 @@ public class BaseEnemy : MonoBehaviour
         }
     }
 
-    protected virtual void Die()
+    protected virtual void Die() // ABSTRACTION
     {
         Destroy(gameObject);
     }

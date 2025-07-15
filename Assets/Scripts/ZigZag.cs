@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class ZigZag : BaseEnemy
+public class ZigZag : BaseEnemy // INHERITANCE
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     [SerializeField] float zigzagStrength;
     [SerializeField] float zigzagSpeed ;
     protected override void Update()
@@ -10,7 +10,7 @@ public class ZigZag : BaseEnemy
         MoveTowardsPlayer();
     }
     
-    protected override void MoveTowardsPlayer()
+    protected override void MoveTowardsPlayer() //POLYMORPHISM
     {
         if (player == null) return;
 
@@ -19,20 +19,19 @@ public class ZigZag : BaseEnemy
     direction.y = 0;
     direction.Normalize();
 
-    // Find a perpendicular direction for the zig-zag
+    
     Vector3 perp = Vector3.Cross(direction, Vector3.up).normalized;
 
-    // Sine-based oscillation factor
-         // How fast to zigzag (tweak for faster/slower)
+  
     float sine = Mathf.Sin(Time.time * zigzagSpeed);
 
-    // Final movement direction: forward plus oscillating side movement
+
     Vector3 zigzagDir = (direction + perp * sine * zigzagStrength).normalized;
 
     // Move
     transform.position += zigzagDir * Speed * Time.deltaTime;
 
-    // Look at player (optional: use direction, or use zigzagDir for a 'drunken' look)
+   
     transform.LookAt(player);
     }
 }

@@ -1,6 +1,6 @@
-public class FastEnemy : BaseEnemy
+public class FastEnemy : BaseEnemy //INHERITANCE
 {
-    protected override void Start()
+    protected override void Start() //POLYMORPHISM
     {
         Speed = 6f;
         MaxHits = 1;
