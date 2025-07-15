@@ -3,8 +3,8 @@ using UnityEngine;
 public class ZigZag : BaseEnemy
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [SerializeField] float zigzagStrength = 5f;
-    [SerializeField] float zigzagSpeed = 10f;
+    [SerializeField] float zigzagStrength;
+    [SerializeField] float zigzagSpeed ;
     protected override void Update()
     {
         MoveTowardsPlayer();

@@ -71,8 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 18.13
   maxHits: 2
-  zigzagStrength: 3.8
-  zigzagSpeed: 132.2
+  zigzagStrength: 10
+  zigzagSpeed: 10
 --- !u!1 &7137886627417541376
 GameObject:
   m_ObjectHideFlags: 0

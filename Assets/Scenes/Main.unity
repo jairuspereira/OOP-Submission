@@ -11501,10 +11501,11 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3025136067541485413, guid: 6903406d3238b48beae3ac90150e360c, type: 3}
   - {fileID: 3025136067541485413, guid: 45218ff9edabf466780068c098ef7df7, type: 3}
+  - {fileID: 3025136067541485413, guid: 0a14dd5efad2c44d288d7b51899f7052, type: 3}
   spawnAreaCenter: {x: 0, y: 1.71, z: 0}
-  spawnRange: 72.1
+  innerRadius: 20
+  outerRadius: 30
   enemiesPerWave: 5
-  timeBetweenWaves: 5.53
   maxWaves: 10
 --- !u!4 &1518873718
 Transform:
